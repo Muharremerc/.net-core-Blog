@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Blog.Entity.Category>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LongDescription)
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LongDescription)
+                </td>
+                <td>
+                    <a href="javascript:DeleteFromSelectedListOfCategory(@item.ID)" class="btn btn-theme">Remove</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    function DeleteFromSelectedListOfCategory(id) {
+        alert(id)
+        $.ajax({
+            url: '/Subject/DeleteFromListofCategory/' + id,
+            dataType: "HTML",
+            type: "GET",
+            contentType: 'application/json',
+            data: id,
+            success: function (data) {
+                $("#callSubjectList").html(null);
+                $("#callSubjectList").html(data);
+            },
+            error: function (hata, ajaxOptions, thrownError) {
+                alert(hata.status);
+                alert(thrownError);
+                alert(hata.responseText);
+            }
+        });
+
+    }
+</script>

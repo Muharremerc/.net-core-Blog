@@ -1,0 +1,30 @@
+﻿@model Blog.Entity.Comment
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-md-1">
+        </div>
+        <div class="col-md-10">
+            <form asp-action="CreateComment" asp-controller="Comment">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Header" class="control-label"></label>
+                    <input asp-for="Header" class="form-control"/>
+                    <span asp-validation-for="Header" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Content" class="control-label"></label>
+                    <input asp-for="Content" class="form-control" />
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+                <input asp-for="SubjectID" value="" type="hidden" />
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+

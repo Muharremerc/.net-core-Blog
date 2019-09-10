@@ -1,0 +1,34 @@
+﻿@model SubjectDetailsDTO
+@{
+    ViewData["Title"] = "SubjectDetails";
+}
+<hr />
+@Html.ActionLink("Create Comment","Index","Comment",new {id=Model.ID})
+<hr />
+<div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+        <div class="media">
+            <div class="media-body">
+                <h3 class="mt-0">@Model.Header</h3>
+                <h3 class="mt-0">@Model.Creater</h3>
+                <h4 class="mt-0">@Model.CreatedDate</h4>
+                <h5>@Model.Content</h5>
+                <hr />
+                @foreach (var Comment in Model.Comment)
+                {
+                    <div class="media mt-3">
+
+                        <div class="media-body">
+                            <h5 class="mt-0" style="color:red">@Comment.Header</h5>
+                            <h6 class="mt-0" style="color:deepskyblue">@Comment.Sender</h6>
+                            <h6 class="mt-0" style="color:deepskyblue">@Comment.Date</h6>
+                            @Comment.Content
+                        </div>
+                    </div><hr />
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

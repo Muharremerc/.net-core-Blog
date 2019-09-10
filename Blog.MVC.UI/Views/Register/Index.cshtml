@@ -1,0 +1,117 @@
+﻿@model Blog.Entity.Member
+
+@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap-reboot.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery/src/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-center text-white mb-4">Bootstrap 4 Login Form</h2>
+                <div class="row">
+                    <div class="col-md-6 mx-auto">
+
+                        <!-- form card login -->
+                        <div class="card rounded-0">
+                            <div class="card-header">
+                                <h3 class="mb-0">Register</h3>
+                            </div>
+                            <div class="card-body">
+                                <form asp-action="Create" asp-controller="Register" >
+                                    <div class="form-group">
+                                        <label asp-for="Name" class="control-label"></label>
+                                        <input asp-for="Name" class="form-control form-control-lg rounded-0" required="" />
+                                        <span asp-validation-for="Name" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Surname" class="control-label"></label>
+                                        <input asp-for="Surname" class="form-control form-control-lg rounded-0" required="" />
+                                        <span asp-validation-for="Surname" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Phone" class="control-label"></label>
+                                        <input asp-for="Phone" class="form-control form-control-lg rounded-0" required="" />
+                                        <span asp-validation-for="Phone" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Email" class="control-label"></label>
+                                        <input asp-for="Email" class="form-control form-control-lg rounded-0" required="" />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Username" class="control-label"></label>
+                                        <input asp-for="Username" class="form-control form-control-lg rounded-0"  id="username" name="username"  />
+                                        <span asp-validation-for="Username" class="text-danger"></span>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Password" class="control-label"></label>
+                                        <input asp-for="Password" class="form-control form-control-lg rounded-0" required="" />
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Information" class="control-label"></label>
+                                        <input asp-for="Information" class="form-control form-control-lg rounded-0" required="" />
+                                        <span asp-validation-for="Information" class="text-danger"></span>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-success btn-lg float-right">Register</button>
+                                </form>
+                            </div>
+                            <!--/card-block-->
+                        </div>
+                        <!-- /form card login -->
+
+                    </div>
+
+
+                </div>
+                <!--/row-->
+
+            </div>
+            <!--/col-->
+        </div>
+        <!--/row-->
+    </div>
+
+
+</body>
+</html>
+    <script>
+        $("#username").keyup(function (event) {
+            var username = $('#username').val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("CheckUsername", "Register")',
+                data: { 'username': username },
+                dataType: 'JSON',
+                success: function (data) {
+
+                    if (data == true) {
+                        document.getElementById("username").style.borderColor = "#cad3e0"
+                    }
+                    else {
+                        document.getElementById("username").style.borderColor = "#FF0000"
+                    }
+                },
+            });
+    });
+</script>

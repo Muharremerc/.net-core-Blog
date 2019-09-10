@@ -1,0 +1,14 @@
+﻿@model IQueryable<Category>
+@{
+    Layout = null;
+}
+
+<div class="nav-scroller py-1 mb-2">
+    <nav class="nav d-flex justify-content-between">
+    @foreach (var item in Model)
+    {
+     @Html.ActionLink(item.Name,"Index", "Category",new { id = item.ID },new { @class = "p-2 text-muted" })
+       
+    }
+</nav>
+</div>

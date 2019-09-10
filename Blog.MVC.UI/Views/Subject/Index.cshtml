@@ -1,0 +1,77 @@
+﻿@model SubjectViewDTO
+
+@{
+   
+}
+<div class="container"><div asp-validation-summary="All"></div>
+    <div class="card">
+
+        <h5 class="card-header info-color white-text text-center py-4">
+            <strong>Create  New Subject </strong>
+        </h5>
+        <div class="card-body px-lg-5 pt-0">
+        </div>
+        <!--Card content-->
+        <div class="card-body px-lg-5 pt-0">
+
+            <!-- Form -->
+            <form asp-action="Create" asp-controller="Subject" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="md-form">
+                    <input asp-for="Header" class="form-control" />
+                    <label asp-for="Header" class="control-label"></label>
+                    <span asp-validation-for="Header" class="text-danger"></span>
+                </div>
+                <div class="md-form">
+                    <input asp-for="Content" class="form-control" />
+                    <label asp-for="Content" class="control-label"></label>
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+                <div class="md-form">
+                    <input asp-for="Description" class="form-control" />
+                    <label asp-for="Description" class="control-label"></label>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="md-form">
+                    <select id="id"
+                            class="form-control"
+                            asp-items="@(new SelectList(@ViewBag.Category,"ID", "Name"))"></select>
+
+                </div>
+                <div id="callSubjectList" name="callSubjectList">
+
+                </div>
+                <a href="javascript:AddSelectedListOfCategory()" class="btn btn-theme">Insert Category</a>
+                <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Create</button>
+
+            </form>
+            <!-- Form -->
+
+        </div>
+
+    </div>
+    <!-- Material form register -->
+</div>
+<script>
+    function AddSelectedListOfCategory() {
+        var id = $('#id').val();
+      
+        $.ajax({
+            url: '/Subject/AddListOfCategory/' + id,
+            dataType: "HTML",
+            type: "GET",
+            contentType: 'application/json',
+            data: id,
+            success: function (data) {
+                $("#callSubjectList").html(null);
+                $("#callSubjectList").html(data);
+            },
+            error: function (hata, ajaxOptions, thrownError) {
+                alert(hata.status);
+                alert(thrownError);
+                alert(hata.responseText);
+            }
+        });
+
+    }
+    </script>

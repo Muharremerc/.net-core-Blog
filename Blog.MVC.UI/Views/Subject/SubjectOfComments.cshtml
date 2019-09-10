@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewData["Title"] = "SubjectOfComments";
+}
+
+<div class="row mb-2">
+    <div class="col-md-1">
+        </div>
+        <div class="col-md-10">
+            <div name="test" id="test">
+            </div>
+        </div>
+    </div>
+    <script>
+        GetCommentList();
+        function GetCommentList() {
+            $.ajax({
+                url: '/Subject/_SubjectOfCommentList',
+                dataType: "HTML",
+                type: "GET",
+                contentType: 'application/json',
+                success: function (data) {
+                    $("#test").html(null);
+                    $("#test").html(data);
+                },
+                error: function (hata, ajaxOptions, thrownError) {
+                    alert(hata.status);
+                    alert(thrownError);
+                    alert(hata.responseText);
+                }
+            });
+
+        }
+    </script>
+    <script>
+        function AcceptComment(id) {
+            $.ajax({
+                url: '/Subject/AcceptComment/' + id,
+                dataType: "HTML",
+                type: "GET",
+                contentType: 'application/json',
+                data: id,
+                success: function (data) {
+                    GetCommentList()
+
+                },
+                error: function (hata, ajaxOptions, thrownError) {
+                    alert(hata.status);
+                    alert(thrownError);
+                    alert(hata.responseText);
+                }
+            });
+
+        }
+    </script>
